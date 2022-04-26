@@ -1,0 +1,29 @@
+<template>
+  <p class="text-left mt-4 mb-2 font-bold">Comments:</p>
+  <template v-for="comment in comments" :key="comment.id">
+    <comment-item :comment="comment"/>
+  </template>
+</template>
+
+
+<script>
+import CommentItem from "@/components/CommentItem";
+
+export default {
+  components: {CommentItem},
+  data() {
+    return {
+      comments: []
+    }
+  },
+
+  async created() {
+    try {
+      const res = await this.axios.get(`https://jsonplaceholder.typicode.com/posts/${this.$route.params.postId}/comments`)
+      this.comments = res.data
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}
+</script>
