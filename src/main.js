@@ -35,5 +35,11 @@ application.config.globalProperties.$mixins = {
     }
 }
 
+application.directive('focus', {
+    mounted(el) {
+        el.querySelector('input').focus()
+    }
+})
+
 application.use(router).use(VueAxios, axios).use(VueToast).mount('#app')
 

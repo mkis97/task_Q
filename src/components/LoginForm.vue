@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-md w-full bg-white px-8 py-6 rounded border border-grey shadow-xl">
     <p class="font-black text-2xl text-theme-eucalyptus text-center">Login</p>
-    <form-input v-model="form.username" label="Username" input-id="username" :error-msg="error.username"/>
+    <form-input v-model="form.username" v-focus label="Username" input-id="username" :error-msg="error.username"/>
     <form-input v-model="form.password" label="Password" input-id="password" type="password" class="mt-2"
                 :error-msg="error.password"/>
     <button-component value="Login" full-width class="mt-4" @clicked="emitLogin"/>
