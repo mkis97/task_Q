@@ -4,6 +4,8 @@ import PostsView from "@/views/PostsView"
 import SinglePostView from "@/views/SinglePostView"
 import auth from "@/middlewares/auth"
 import loggedIn from "@/middlewares/loggedIn"
+import DefaultLayout from "@/layouts/DefaultLayout"
+import MainLayout from "@/layouts/MainLayout"
 
 const routes = [
     {
@@ -12,7 +14,8 @@ const routes = [
         component: IndexView,
         beforeEnter: () =>{
             loggedIn()
-        }
+        },
+        meta: { layout: DefaultLayout }
     },
     {
         path: '/posts',
@@ -20,7 +23,8 @@ const routes = [
         component: PostsView,
         beforeEnter: () =>{
             auth()
-        }
+        },
+        meta: { layout: MainLayout }
     },
     {
         path: '/posts/:postId',
@@ -28,7 +32,8 @@ const routes = [
         component: SinglePostView,
         beforeEnter: () =>{
             auth()
-        }
+        },
+        meta: { layout: MainLayout }
     }
 ]
 
