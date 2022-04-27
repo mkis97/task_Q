@@ -4,6 +4,8 @@ import router from "./router/index.js";
 import './styles/app.css'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
 
 const application = createApp(App)
 
@@ -17,5 +19,5 @@ application.config.globalProperties.$filters = {
     }
 }
 
-application.use(router).use(VueAxios, axios).mount('#app')
+application.use(router).use(VueAxios, axios).use(VueToast).mount('#app')
 

@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-theme-chinook grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-2">
+  <div class="bg-theme-chinook min-h-screen grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-2">
     <template v-for="(post, index) in posts" :key="post.id">
       <post-item :post="post" :post-index="index"/>
     </template>

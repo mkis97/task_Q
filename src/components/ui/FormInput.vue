@@ -16,6 +16,7 @@
             @input="$emit('update:modelValue', $event.target.value)"
         />
       </div>
+      <p class="text-xs text-red-900">{{errorMsg}}</p>
     </div>
   </div>
 </template>
@@ -41,6 +42,11 @@ export default {
     label: {
       type: String,
       required: true,
+      default: "",
+    },
+    errorMsg: {
+      type: String,
+      required: false,
       default: "",
     }
   },
