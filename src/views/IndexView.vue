@@ -6,14 +6,13 @@
 
 
 <script>
-
-
 import LoginForm from "@/components/LoginForm";
+
 export default {
   components: {LoginForm},
   methods: {
     login() {
-      console.log(this.form)
+      localStorage.setItem('q_login', 'true')
       this.$router.push({name: 'Posts'})
     }
   }
