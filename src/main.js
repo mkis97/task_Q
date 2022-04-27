@@ -19,5 +19,21 @@ application.config.globalProperties.$filters = {
     }
 }
 
+application.config.globalProperties.$mixins = {
+    getUser(usersArray, userId) {
+        if (!usersArray.length || !userId) return ''
+        return usersArray.find(user => user.id === userId)?.name
+    },
+
+    acronym(str) {
+        let res = ''
+        let arr = str.split(' ')
+        arr.forEach(item => {
+            res += item.charAt(0)
+        })
+        return res.toUpperCase()
+    }
+}
+
 application.use(router).use(VueAxios, axios).use(VueToast).mount('#app')
 

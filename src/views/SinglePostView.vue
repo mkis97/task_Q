@@ -1,6 +1,6 @@
 <template>
   <div class="bg-theme-chinook h-full w-full min-h-screen flex flex-row items-center justify-center py-16">
-    <post-item :post="post" hide-post-numeration>
+    <post-item :post="post" :users-array="users" hide-post-numeration>
       <template #append>
         <comments-list/>
       </template>
@@ -17,14 +17,17 @@ export default {
   components: {CommentsList, PostItem},
   data() {
     return {
-      post: {}
+      post: {},
+      users: []
     }
   },
 
   async created() {
     try {
-      const res = await this.axios.get(`https://jsonplaceholder.typicode.com/posts/${this.$route.params.postId}`)
-      this.post = res.data
+      const resPost = await this.axios.get(`https://jsonplaceholder.typicode.com/posts/${this.$route.params.postId}`)
+      this.post = resPost.data
+      const resUsers = await this.axios.get('https://jsonplaceholder.typicode.com/users')
+      this.users = resUsers.data
     } catch (e) {
       console.log(e)
     }

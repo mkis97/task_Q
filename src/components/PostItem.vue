@@ -1,6 +1,10 @@
 <template>
-  <div class="border border-grey px-6 pt-2 pb-6 rounded bg-white cursor-pointer shadow-md max-w-lg"
+  <div class="border border-grey px-6 pt-4 pb-6 rounded bg-white cursor-pointer shadow-md max-w-lg"
        @click="openSinglePost">
+    <div class="flex flex-row items-center flex flex-wrap">
+      <user-acronym :acronym="$mixins.acronym($mixins.getUser(usersArray, post.userId))"/>
+      <span class="text-xs font-thin pl-2">{{ $mixins.getUser(usersArray, post.userId) }}</span>
+    </div>
     <p class="text-xs text-right font-thin italic" v-if="!hidePostNumeration">
       Post no.{{ postIndex + 1 }}
     </p>
@@ -11,9 +15,10 @@
 </template>
 
 <script>
+import UserAcronym from "@/components/ui/UserAcronym";
 export default {
   name: 'PostItem',
-
+  components: {UserAcronym},
   props: {
     post: {
       type: Object,
@@ -30,6 +35,11 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    usersArray: {
+      type: Array,
+      required: true,
+      default: () => []
     }
   },
 
