@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from 'vue-router'
 import IndexView from '@/views/IndexView'
 import PostsView from "@/views/PostsView"
 import SinglePostView from "@/views/SinglePostView"
+import NotFoundView from "@/views/NotFoundView"
 import auth from "@/middlewares/auth"
 import loggedIn from "@/middlewares/loggedIn"
 import DefaultLayout from "@/layouts/DefaultLayout"
@@ -34,7 +35,14 @@ const routes = [
             auth()
         },
         meta: { layout: MainLayout }
-    }
+    },
+    {
+        path:  '/:catchAll(.*)',
+        name: '404 Page',
+        component: NotFoundView,
+        meta: { layout: DefaultLayout }
+    },
+
 ]
 
 const router = createRouter({history: createWebHistory(process.env.BASE_URL), routes})
