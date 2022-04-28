@@ -15,6 +15,7 @@ import CommentsList from "@/components/CommentsList";
 
 export default {
   components: {CommentsList, PostItem},
+
   data() {
     return {
       post: {},

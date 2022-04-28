@@ -10,6 +10,7 @@ import LoginForm from "@/components/LoginForm";
 
 export default {
   components: {LoginForm},
+
   methods: {
     login() {
       localStorage.setItem('q_login', 'true')

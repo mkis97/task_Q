@@ -8,14 +8,18 @@
       <form-select v-model="localParams.userId" :options="users" input-id="list-user-select" label="User"/>
       <form-input v-model="localParams.q" input-id="list-search-input" label="Search"/>
     </div>
-    <div
-        class=" grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-2">
+
+    <div v-if="posts.length"
+         class=" grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 p-2">
       <template v-for="post in posts" :key="post.id">
-        <post-item :post="post" :users-array="users" show-more-icon @comments="showComments"/>
+        <post-item :post="post" :users-array="users" show-more-icon clickable @comments="showComments"/>
       </template>
     </div>
+    <div v-else class="h-screen w-full flex flex-row items-center justify-center">
+      <span class="animate-bounce text-2xl">No items</span>
+    </div>
 
-    <pagination-component v-model="localParams._page"/>
+    <pagination-component v-if="posts.length && showPagination" v-model="localParams._page"/>
 
     <modal-component :show-modal="modalActive" @closeModal="modalActive=false">
       <template #body>
@@ -33,6 +37,7 @@ import FormSelect from "@/components/ui/FormSelect";
 import PaginationComponent from "@/components/ui/PaginationComponent";
 import ModalComponent from "@/components/ui/ModalComponent";
 import CommentsList from "@/components/CommentsList";
+import debounce from "lodash.debounce"
 
 export default {
   components: {CommentsList, ModalComponent, PaginationComponent, FormSelect, FormInput, PostItem},
@@ -73,6 +78,12 @@ export default {
     }
   },
 
+  computed: {
+    showPagination() {
+      return !this.localParams.q && !this.localParams.userId
+    }
+  },
+
   methods: {
     async getPosts() {
       try {
@@ -82,6 +93,10 @@ export default {
         this.$toast.error('Something went wrong')
       }
     },
+
+    debouncedGetPosts: debounce(async function () {
+      await this.getPosts()
+    }, 300),
 
     showComments(id) {
       this.selectedPostIdForPreview = id
@@ -93,8 +108,16 @@ export default {
     localParams: {
       deep: true,
       handler() {
-        this.getPosts()
+        this.debouncedGetPosts()
       }
+    },
+
+    "localParams.q"() {
+      this.localParams._page = 1
+    },
+
+    "localParams.userId"() {
+      this.localParams._page = 1
     }
   }
 }

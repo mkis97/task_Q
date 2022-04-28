@@ -16,6 +16,8 @@ import useVuelidate from '@vuelidate/core'
 import {required} from '@vuelidate/validators'
 
 export default {
+  name: 'LoginForm',
+
   components: {ButtonComponent, FormInput},
 
   setup() {
@@ -50,7 +52,7 @@ export default {
       const res = await this.axios.get('https://jsonplaceholder.typicode.com/users')
       this.allowedUsernames = res.data.map(i => i.username)
     } catch (e) {
-      console.log(e)
+      this.$toast.error('Something went wrong')
     }
   },
 

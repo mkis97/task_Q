@@ -1,7 +1,8 @@
 <template>
-  <div class="border rounded p-4 mt-1 relative">
+  <div class="border rounded p-4 mt-1 relative cursor-default">
     <p class="text-left font-bold text-sm">{{ $filters.capitalize(comment.name) }}</p>
-    <i class="bi bi-chevron-compact-down absolute top-3 right-3 cursor-pointer" @click="expanded=!expanded"/>
+    <i class="bi bi-chevron-compact-down absolute top-3 right-3 cursor-pointer" :class="{ 'rotate-180': expanded }"
+       @click="expanded=!expanded"/>
     <transition name="grow-out">
       <p class="text-left text-sm" v-show="expanded">{{ comment.body }}</p>
     </transition>
@@ -14,6 +15,8 @@
 
 <script>
 export default {
+  name: 'CommentItem',
+
   props: {
     comment: {
       type: Object,

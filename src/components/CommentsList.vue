@@ -1,5 +1,5 @@
 <template>
-  <p class="text-left mt-4 mb-2 font-bold">Comments:</p>
+  <p class="text-left mt-4 mb-2 font-bold cursor-default">Comments:</p>
   <template v-for="comment in comments" :key="comment.id">
     <comment-item :comment="comment"/>
   </template>
@@ -10,9 +10,11 @@
 import CommentItem from "@/components/CommentItem";
 
 export default {
+  name: 'CommentsList',
+
   components: {CommentItem},
 
-  props:{
+  props: {
     postId: {
       type: Number,
       required: false,
@@ -31,7 +33,7 @@ export default {
       const res = await this.axios.get(`https://jsonplaceholder.typicode.com/posts/${this.$route.params.postId || this.postId}/comments`)
       this.comments = res.data
     } catch (e) {
-      console.log(e)
+      this.$toast.error('Something went wrong')
     }
   }
 }

@@ -28,10 +28,8 @@ application.config.globalProperties.$mixins = {
     acronym(str) {
         let res = ''
         let arr = str.split(' ')
-        arr.forEach(item => {
-            res += item.charAt(0)
-        })
-        return res.toUpperCase()
+        res = arr.map(i => i.charAt(0)).join('')
+        return res
     }
 }
 
