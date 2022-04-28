@@ -16,7 +16,7 @@
       </template>
     </div>
     <div v-else class="h-screen w-full flex flex-row items-center justify-center">
-      <span class="animate-bounce text-2xl">No items</span>
+      <span class="animate-bounce text-2xl">No items.</span>
     </div>
 
     <pagination-component v-if="posts.length && showPagination" v-model="localParams._page"/>
@@ -71,8 +71,7 @@ export default {
   async created() {
     try {
       await this.getPosts()
-      const resUsers = await this.axios.get('https://jsonplaceholder.typicode.com/users')
-      this.users = resUsers.data
+      this.users = this.$store.getters.getUsers
     } catch (e) {
       this.$toast.error('Something went wrong')
     }

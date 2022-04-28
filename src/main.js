@@ -6,6 +6,7 @@ import axios from 'axios'
 import VueAxios from 'vue-axios'
 import VueToast from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
+import store from "@/store/index"
 
 const application = createApp(App)
 
@@ -39,5 +40,5 @@ application.directive('focus', {
     }
 })
 
-application.use(router).use(VueAxios, axios).use(VueToast).mount('#app')
+application.use(router).use(VueAxios, axios).use(VueToast).use(store).mount('#app')
 

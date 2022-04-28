@@ -47,13 +47,8 @@ export default {
     }
   },
 
-  async created() {
-    try {
-      const res = await this.axios.get('https://jsonplaceholder.typicode.com/users')
-      this.allowedUsernames = res.data.map(i => i.username)
-    } catch (e) {
-      this.$toast.error('Something went wrong')
-    }
+  mounted() {
+    this.allowedUsernames = this.$store.getters.getUsers.map(i => i.username)
   },
 
   methods: {

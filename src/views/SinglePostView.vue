@@ -1,6 +1,6 @@
 <template>
   <div class="bg-theme-chinook h-full w-full min-h-screen flex flex-row items-center justify-center py-16">
-    <post-item :post="post" :users-array="users">
+    <post-item v-if="isHydrated" :post="post" :users-array="users">
       <template #append>
         <comments-list/>
       </template>
@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       post: {},
-      users: []
+      users: [],
+      isHydrated: false
     }
   },
 
@@ -27,8 +28,8 @@ export default {
     try {
       const resPost = await this.axios.get(`https://jsonplaceholder.typicode.com/posts/${this.$route.params.postId}`)
       this.post = resPost.data
-      const resUsers = await this.axios.get('https://jsonplaceholder.typicode.com/users')
-      this.users = resUsers.data
+      this.users = this.$store.getters.getUsers
+      this.isHydrated = true
     } catch (e) {
       this.$toast.error('Something went wrong')
     }

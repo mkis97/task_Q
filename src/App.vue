@@ -6,7 +6,13 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+
+  created() {
+    this.$store.dispatch("fetchUsers")
+
+    console.log(this.$store.getters.getUsers)
+  }
 }
 </script>
 
