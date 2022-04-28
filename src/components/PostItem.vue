@@ -1,6 +1,7 @@
 <template>
   <div class="relative border border-grey px-6 pt-4 pb-6 rounded bg-white shadow-md max-w-lg"
        :class="clickable ? 'cursor-pointer' : 'cursor-default'"
+       v-on="clickable ? {click: openSinglePost} : {}"
        @click="openSinglePost">
     <div class="flex flex-row items-center flex flex-wrap">
       <user-acronym :acronym="$mixins.acronym($mixins.getUser(usersArray, post.userId))"/>
