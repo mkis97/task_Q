@@ -11,6 +11,15 @@ import CommentItem from "@/components/CommentItem";
 
 export default {
   components: {CommentItem},
+
+  props:{
+    postId: {
+      type: Number,
+      required: false,
+      default: null
+    }
+  },
+
   data() {
     return {
       comments: []
@@ -19,7 +28,7 @@ export default {
 
   async created() {
     try {
-      const res = await this.axios.get(`https://jsonplaceholder.typicode.com/posts/${this.$route.params.postId}/comments`)
+      const res = await this.axios.get(`https://jsonplaceholder.typicode.com/posts/${this.$route.params.postId || this.postId}/comments`)
       this.comments = res.data
     } catch (e) {
       console.log(e)

@@ -12,7 +12,7 @@
             :ref="inputId"
             :id="inputId"
             :type="type"
-            class="w-full h-8 py-2 px-2 border rounded focus:outline-theme-eucalyptus"
+            class="w-full h-8 py-2 px-2 border rounded focus:outline-theme-eucalyptus text-xs"
             @input="$emit('update:modelValue', $event.target.value)"
         />
       </div>

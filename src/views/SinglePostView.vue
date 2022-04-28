@@ -1,6 +1,6 @@
 <template>
   <div class="bg-theme-chinook h-full w-full min-h-screen flex flex-row items-center justify-center py-16">
-    <post-item :post="post" :users-array="users" hide-post-numeration>
+    <post-item :post="post" :users-array="users">
       <template #append>
         <comments-list/>
       </template>
@@ -29,7 +29,7 @@ export default {
       const resUsers = await this.axios.get('https://jsonplaceholder.typicode.com/users')
       this.users = resUsers.data
     } catch (e) {
-      console.log(e)
+      this.$toast.error('Something went wrong')
     }
   }
 }

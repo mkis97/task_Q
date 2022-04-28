@@ -1,6 +1,7 @@
 <template>
-  <div class="border rounded p-4 mt-1" @click="expanded=!expanded">
+  <div class="border rounded p-4 mt-1 relative">
     <p class="text-left font-bold text-sm">{{ $filters.capitalize(comment.name) }}</p>
+    <i class="bi bi-chevron-compact-down absolute top-3 right-3 cursor-pointer" @click="expanded=!expanded"/>
     <transition name="grow-out">
       <p class="text-left text-sm" v-show="expanded">{{ comment.body }}</p>
     </transition>

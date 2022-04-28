@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="app_bar" class="bg-theme-eucalyptus flex flex-row justify-between items-center h-12 fixed top-0 w-full px-4">
+    <div id="app_bar" class="bg-theme-eucalyptus flex flex-row justify-between items-center h-12 fixed top-0 w-full px-4 z-50">
       <span class="text-xl font-bold text-white">Simple app</span>
       <button-component value="Log out" @clicked="logOut"/>
     </div>
